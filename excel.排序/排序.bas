@@ -67,18 +67,77 @@ Sub Color(row As Integer, col As Integer, clr As Long)
 End Sub
 
 
+Sub InitData()
+
+    row = 7
+    For j = 5 To 14
+        Worksheets("Sheet2").Cells(row, j) = Int(100 * Rnd)
+              
+    Next j
+End Sub
+
+
+'≤Â»Î≈≈–Ú
+Sub InsertSort()
+
+    Dim i%, j%, row%, tmp%
+    Dim clr1 As Long, clr2 As Long, clrf As Long
+    
+    row = 7
+    clr1 = 5287936
+    clr2 = 49407
+    clrf = 15773696
+    
+    For i = 6 To 14
+        
+        tmp = Worksheets("Sheet2").Cells(row, i).Value
+        Call Color(row, i, clr2)
+        Call Sleep(1)
+        Call CellMoveTo(row, i, row - 1, i)
+        Call Sleep(1)
+        
+        For j = i - 1 To 5 Step -1
+         
+            Call Color(row, j, clr2)
+            Call Sleep(1)
+            If tmp < Worksheets("Sheet2").Cells(row, j).Value Then
+                
+                Call CellMoveTo(row, j, row, j + 1)
+                Call Sleep(1)
+                Call Color(row, j + 1, clr1)
+                Call Sleep(1)
+                Call CellMoveTo(row - 1, j + 1, row - 1, j)
+                Call Sleep(1)
+                           
+            Else
+                Call Color(row, j, clr1)
+                Call Sleep(1)
+                Exit For
+            End If
+            
+        Next j
+        
+        Call CellMoveTo(row - 1, j + 1, row, j + 1)
+        Call Sleep(1)
+        Call Color(row, j + 1, clr1)
+        Call Sleep(1)
+    
+    Next i
+
+End Sub
+
 
 '√∞≈›≈≈–Ú
 Sub BubbleSort()
 
     Dim i%, j%, mend%, row%
-    Dim clr1 As Long, clr2 As Long
-    
+    Dim clr1 As Long, clr2 As Long, clrf As Long
     
     mend = 14
     row = 7
     clr1 = 5287936
     clr2 = 49407
+    clrf = 15773696
     
     For i = 5 To 13
         For j = 5 To mend - 1
@@ -94,8 +153,13 @@ Sub BubbleSort()
             Call Color(row, j + 1, clr1)
             Call Sleep(1)
         Next j
+        
+        Call Color(row, mend, clrf)
         mend = mend - 1
+        Call Sleep(1)
     Next i
+    
+    Call Color(row, mend, clrf)
 
 End Sub
 
